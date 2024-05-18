@@ -18,9 +18,9 @@
       <h2>Blogs</h2>
       <ul>
         <li v-for="blog in blogs" :key="blog.title">
-          <h3>{{ blog.title }}</h3>
-          <p>{{ blog.content }}</p>
-          <p>{{ blog.date }}</p>
+          <h3>{{ blog.User_id }}</h3>
+          <p>{{ blog.User_name }}</p>
+          <!--<p>{{ blog.date }}</p>-->
         </li>
       </ul>
     </div>
