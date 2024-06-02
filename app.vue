@@ -7,6 +7,7 @@
       <h2>Projects</h2>
       <ul>
         <li v-for="project in projects" :key="project.name">
+          <p>{{ project.id }}</p>
           <h3>{{ project.name }}</h3>
           <p>{{ project.description }}</p>
         </li>
@@ -46,14 +47,17 @@
     <form @submit.prevent="updateProject">
       <div>
         <label for="id">Project Id:</label>
-        <input type="text" v-model="newUpdate.id" id="id" required/>
+        <select type="text" v-model="newUpdate.id" id="id" required>
+          <option v-for="project in projects" :key="project.id" :value="project._id">{{ project.name }}</option>
+        </select>
+
       </div>
       <div>
-        <label for="name">New Project Name (Optional):</label>
+        <label for="name">New Project Name :</label>
         <input type="text" v-model="newUpdate.name" id="name" />
       </div>
       <div>
-        <label for="description">New Project Description (Optional):</label>
+        <label for="description">New Project Description :</label>
         <textarea v-model="newUpdate.description" id="description" placeholder="Project Details"></textarea>
       </div>
       <button type="submit">Update the Project</button>
@@ -65,7 +69,10 @@
     <form @submit.prevent="deleteProject">
       <div>
         <label for="id">Project Id:</label>
-        <input type="text" v-model="newDelete.id" id="id" required/>
+        <select type="text" v-model="newDelete.id" id="id" required>
+          <option v-for="project in projects" :key="project.id" :value="project._id">{{ project.name}}</option>
+        
+        </select>
       </div>
       <button type="submit">Delete the Project</button>
     </form>
@@ -115,6 +122,7 @@
     }
     
   };
+
 
   const newUpdate = ref({
     id: "",
@@ -178,7 +186,7 @@
         projects.value.splice(index, 1);
       }
 
-      newDelete.value.id = '';
+      newDelete.value.id = '';//set nothing to the id
     } catch (error) {
       console.error('Error:', error);
     }
